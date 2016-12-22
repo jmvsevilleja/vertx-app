@@ -1,6 +1,10 @@
 package io.vertx.blog.first;
 
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
+
+import io.vertx.core.json.JsonObject;
+
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -9,16 +13,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+
+
 @RunWith(VertxUnitRunner.class)
 public class MyFirstVerticleTest {
 
     private Vertx vertx;
+    private Integer port;
 
     @Before
     public void setUp(TestContext context) {
         vertx = Vertx.vertx();
-        vertx.deployVerticle(MyFirstVerticle.class.getName(),
-                context.asyncAssertSuccess());
+        port = 8081;
+        DeploymentOptions options = new DeploymentOptions()
+                .setConfig(new JsonObject().put("http.port", port)
+                );
+        vertx.deployVerticle(MyFirstVerticle.class.getName(), options, context.asyncAssertSuccess());
     }
 
     @After
@@ -30,12 +40,11 @@ public class MyFirstVerticleTest {
     public void testMyApplication(TestContext context) {
         final Async async = context.async();
 
-        vertx.createHttpClient().getNow(8080, "localhost", "/",
-                response -> {
-                    response.handler(body -> {
-                        context.assertTrue(body.toString().contains("Hello"));
-                        async.complete();
-                    });
-                });
+        vertx.createHttpClient().getNow(port, "localhost", "/", response -> {
+            response.handler(body -> {
+                context.assertTrue(body.toString().contains("Hello"));
+                async.complete();
+            });
+        });
     }
 }

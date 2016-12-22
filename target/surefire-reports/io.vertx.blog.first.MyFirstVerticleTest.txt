@@ -1,0 +1,23 @@
+-------------------------------------------------------------------------------
+Test set: io.vertx.blog.first.MyFirstVerticleTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.309 sec <<< FAILURE!
+testMyApplication(io.vertx.blog.first.MyFirstVerticleTest)  Time elapsed: 1.155 sec  <<< ERROR!
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:125)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:485)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1089)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:430)
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:415)
+	at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:903)
+	at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:198)
+	at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:348)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:357)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:357)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:111)
+	at java.lang.Thread.run(Thread.java:745)
